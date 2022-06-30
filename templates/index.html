@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block main %}
+<div class="search-div">
+    <form action="/" method="post">
+        <input autocomplete="off" autofocus placeholder="Search..." type="Text" name="search_input">
+        <input name="search_column" type="radio" value="Name" checked>Name
+        {% for column_name in column_names[3:] %}
+        <input name="search_column" type="radio" value="{{column_name}}">{{column_name}}
+        {% endfor %}
+        <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
+    </form>
+</div>
+
+<div class="sort-div">
+    <form action="/" method="post">
+        <input name="sort_type" type="radio" value="ASC" checked>Ascending
+        <input name="sort_type" type="radio" value="DESC">Descending
+        <div class="dropdown">       
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort By
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                {% for column_name in column_names[2:] %}
+                <li><button class="tester dropdown-item" type="submit" name="sort_column" value="{{column_name}}">{{column_name}}</button></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </form>
+</div>
+
+<table class="table table-hover">
+	<thead>
+	    <tr>
+            <th>{{column_names[2]}}</th>
+	    	{% for column_name in column_names[3:] %}
+                {% if column_name == edit_column %}
+                    <th>
+                        <form action="/editcolumn" method="post">
+                            <input autocomplete="off" autofocus type="TEXT" name="change_column_name" value="{{column_name}}">
+                            <button type="submit"><i class="fas fa-check-square"></i></button>
+                        </form>
+                    </th>
+                {% else %}
+        	      	<th>
+                        {{column_name}}
+                        <form action="/editcolumn" method="post" class="d-inline-block">
+                            <button type="submit" name="edit_column" value={{column_name}}><i class="fas fa-edit"></i></button>
+                        </form>
+                        <form action="/deletecolumn" method="post" class="d-inline-block">
+                            <button type="submit" name="delete_column" value="{{column_name}}"><i class="fas fa-trash-alt"></i></button>
+                        </form>
+                    </th>
+                {% endif %}            
+	      	{% endfor %}
+            {% if pluscolumn == False %}
+                <th><a href="/addnewcolumn"><button class="newcolumn-btn"><i class="fas fa-plus"></i> Add New Column</button></a></th>
+            {% else %}
+                <th>
+                    <form action="/addnewcolumn" method="post">
+                        <input autocomplete="off" autofocus type="Text" name="new_column_name">
+                        <button type="submit"><i class="fas fa-check-square"></i></button>
+                    </form>
+                </th>
+            {% endif %}
+        </tr>
+	</thead>
+	<tbody>
+        {% for item in items %}
+        <tr>
+            {% if item[1] == item_id %}
+                <form action="/edititem" method="post">
+                    {% for index in range(2, item|length) %}
+                        <td><input autocomplete="off" autofocus type="text" name="{{column_names[index]}}" value="{{item[index]}}"></td>
+                    {% endfor %}
+                        <td><button type="submit" name="item_id" value="{{item[1]}}"><i class="fas fa-check-square"></i></button></td>
+                </form>
+            {% else %}
+                {% for info in item[2:] %}
+                    <td>{{info}}</td>
+                {% endfor %}
+                	<td>
+                		<form action="/edititem" method="post" class="d-inline-block"><button type="submit" name="item_id" value={{item[1]}}><i class="fas fa-edit"></i></button></form>
+                		<form action="/deleteitem" method="post" class="d-inline-block"><button type="submit" name="item_id" value="{{item[1]}}"><i class="fas fa-trash-alt"></i></button></form>
+                	</td>
+            {% endif %}
+        </tr>
+        {% endfor%}
+        <tr>
+        	{% if plusitem == False %}
+        		<td colspan={{column_names[0]|length}}><a href="/addnewitem"><button class="newitem-btn"><i class="fas fa-plus"></i> Add New Item</button></a></td>
+        	{% else %}
+        		<form action="/addnewitem" method="post">
+        			{% for column_name in column_names[2:] %}
+                		<td><input autocomplete="off" autofocus type="text" name="{{column_name}}"></td>
+            		{% endfor %}
+            			<td><button type="submit" value="Add"><i class="fas fa-check-square"></i></button></td>
+            	</form>
+        	{% endif %}
+        </tr>       
+    </tbody>
+</table>
+{% endblock %}
