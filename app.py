@@ -12,9 +12,9 @@ Session(app)
 
 # Configure Database
 db = mysql.connector.connect(
-	host="localhost",
-	user="root",
-	passwd="never",
+	host="easy-table.cqungzqiodei.ap-southeast-1.rds.amazonaws.com",
+	user="admin",
+	passwd="9X4&34exf$5Q#",
 	database="easytabledatabase"
 	)
 
