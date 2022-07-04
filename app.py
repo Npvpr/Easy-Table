@@ -247,3 +247,8 @@ def logout():
 
 if __name__=="__main__":
 	app.run(debug=True)
+
+"""
+	Bugs:
+	- creating new columns with already existed names
+"""

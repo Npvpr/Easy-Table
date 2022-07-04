@@ -37,7 +37,7 @@
                 {% if column_name == edit_column %}
                     <th>
                         <form action="/editcolumn" method="post">
-                            <input autocomplete="off" autofocus type="TEXT" name="change_column_name" value="{{column_name}}">
+                            <input required  pattern="[A-Za-z0-9]+" title="No space or special characters allowed!" autocomplete="off" autofocus type="TEXT" name="change_column_name" value="{{column_name}}">
                             <button type="submit"><i class="fas fa-check-square"></i></button>
                         </form>
                     </th>
@@ -58,7 +58,7 @@
             {% else %}
                 <th>
                     <form action="/addnewcolumn" method="post">
-                        <input autocomplete="off" autofocus type="Text" name="new_column_name">
+                        <input required  pattern="[A-Za-z0-9]+" title="No space or special characters allowed!" autocomplete="off" autofocus type="Text" name="new_column_name">
                         <button type="submit"><i class="fas fa-check-square"></i></button>
                     </form>
                 </th>
@@ -92,7 +92,7 @@
         	{% else %}
         		<form action="/addnewitem" method="post">
         			{% for column_name in column_names[2:] %}
-                		<td><input autocomplete="off" autofocus type="text" name="{{column_name}}"></td>
+                		<td><input required autocomplete="off" autofocus type="text" name="{{column_name}}"></td>
             		{% endfor %}
             			<td><button type="submit" value="Add"><i class="fas fa-check-square"></i></button></td>
             	</form>
