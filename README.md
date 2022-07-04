@@ -1,11 +1,19 @@
 <h1>Easy Table</h1>
-<p>Hi, this is the first project that I built from scratch. After learning SQL and Flask, I really wanted to test more about getting, adding, updating, and dropping data records to and from the database. Therefore, I decided to develop a web application where you can manipulate data records from the database like SQL but much simpler and easier with graphical user interfaces.</p>
+<p>Hi, this is the first project that I built from scratch. After learning SQL and Flask, I really wanted to test more about Creating, Reading, Updating, and Deleting operations of data records to and from the database. Therefore, I decided to develop a web application where you can manipulate data records from the database like SQL but much simpler and easier with graphical user interfaces.</p>
 <p>Website Link: https://easy-table-never.herokuapp.com</p>
 
 <h2>Features Supported</h2>
 <ul>
-	<li>hi</li>
-	<li>hello</li>
+	<li>Login, logout, or Register Users</li>
+	<li>Add, edit or delete columns</li>
+	<li>Add, edit or delete data rows</li>
+	<li>Sort the data records by any column(Ascending or Descending)</li>
+	<li>Search any data by any column</li>
+</ul>
+
+<h2>Technologies Used</h2>
+<ul>
+	<li>
 </ul>
 
 
